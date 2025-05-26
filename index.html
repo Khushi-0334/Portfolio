@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khushi's Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #e6f3fa, #f0fff4),
+        url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%23a7f3d0" fill-opacity="0.3" d="M0,128L48,144C96,160,192,192,288,197.3C384,203,480,181,576,165.3C672,149,768,139,864,154.7C960,171,1056,213,1152,213.3C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"%3E%3C/path%3E%3C/svg%3E');
+      background-size: cover, 100% 300px;
+      background-repeat: no-repeat, repeat;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: linear-gradient(145deg, #ffffff, #e6f3fa);
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 50;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      max-width: 800px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .progress-bar {
+      height: 10px;
+      background-color: #d1d5db;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      background-color: #34d399;
+      transition: width 0.5s ease;
+    }
+
+    #certificateModal img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    section {
+      position: relative;
+      z-index: 2;
+      padding-top: 5rem; /* Offset for sticky navbar */
+    }
+  </style>
+</head>
+
+<body class="min-h-screen">
+  <!-- Navbar -->
+  <nav class="flex justify-between items-center p-6 bg-blue-500/30 text-gray-800 sticky top-0 z-10 backdrop-blur-md">
+    <div class="text-3xl font-bold text-blue-600">Khushi</div>
+    <div class="space-x-6">
+      <a href="#home" class="text-gray-800 hover:text-blue-600">Home</a>
+      <a href="#about" class="text-gray-800 hover:text-blue-600">About</a>
+      <a href="#skills" class="text-gray-800 hover:text-blue-600">Skills</a>
+      <a href="#certifications" class="text-gray-800 hover:text-blue-600">Certifications</a>
+      <a href="#projects" class="text-gray-800 hover:text-blue-600">Projects</a>
+      <a href="#contact" class="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 btn">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Home Section -->
+  <section id="home" class="flex items-center justify-center min-h-screen px-6">
+    <div class="flex flex-col md:flex-row items-center gap-10">
+      <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_ktwnwv5m.json" background="transparent"
+        speed="0.5" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+      <div class="text-center md:text-left">
+        <h1 class="text-5xl font-bold text-gray-800 mb-3">Hi, I'm Khushi <br><span id="typed" class="text-blue-600"></span></h1>
+        <p class="text-2xl text-gray-700 mb-4">I’m a passionate Full Stack Developer who builds interactive,<br>scalable web applications using modern technologies.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resume Modal -->
+  <div id="resumeModal" class="modal">
+    <div class="modal-content">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">My Resume</h2>
+      <div class="space-y-4">
+        <h3 class="text-xl font-semibold">Khushi Sayyad</h3>
+        <p class="text-gray-600">Full Stack Developer</p>
+        <p class="text-gray-600">Email: khushisayyad01@gmail.com | Phone: +91 9370198090</p>
+        <h4 class="text-lg font-semibold mt-4">Education</h4>
+        <p class="text-gray-600">B.Tech in Computer Science, SITCOE College, 2020-2024</p>
+        <h4 class="text-lg font-semibold mt-4">Experience</h4>
+        <p class="text-gray-600">Full Stack Developer, Generation India, 2025<br>Developed scalable web applications using HTML, CSS and other Web Technologies.</p>
+        <h4 class="text-lg font-semibold mt-4">Skills</h4>
+        <p class="text-gray-600">HTML, CSS, JavaScript, Java, MySQL</p>
+        <div class="flex gap-4 mt-4">
+          <button onclick="closeResumeModal()"
+            class="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-600">Close</button>
+          <a href="https://drive.google.com/file/d/14PKKsn-6dwvbI3W29NRSL7fd6lqOokYm/view?usp=drivesdk" target="_blank"
+            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Download PDF</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Certificate Modal -->
+  <div id="certificateModal" class="modal">
+    <div class="modal-content">
+      <img id="certificateImage" src="" alt="Certificate" class="mx-auto">
+      <button onclick="closeCertificateModal()"
+        class="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-600 mt-4">Close</button>
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <section id="about" class="py-12 px-6 text-center">
+    <h2 class="text-4xl font-bold text-gray-800 mb-6">About Me</h2>
+    <p class="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed">
+      I am a passionate Full Stack Developer building dynamic and scalable web applications.
+      I specialize in Java, HTML, CSS, and more. My journey in tech is driven by a love for problem-solving and creating user-friendly solutions. <br>I thrive on learning new technologies and delivering high-quality projects that make a difference.
+    </p>
+    <div class="mt-8">
+      <a href="https://drive.google.com/file/d/14PKKsn-6dwvbI3W29NRSL7fd6lqOokYm/view?usp=drivesdk" target="_blank"
+        class="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 btn text-lg">Download Resume</a>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="py-12 px-6">
+    <h2 class="text-4xl font-bold text-center text-gray-800 mb-10">Skills</h2>
+    <div class="max-w-4xl mx-auto space-y-4">
+      <div class="flex items-center gap-4">
+        <span class="w-24 font-semibold text-gray-800">Java</span>
+        <div class="progress-bar w-full">
+          <div class="progress" style="width: 90%"></div>
+        </div>
+        <span class="text-gray-600">90%</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span class="w-24 font-semibold text-gray-800">HTML</span>
+        <div class="progress-bar w-full">
+          <div class="progress" style="width: 95%"></div>
+        </div>
+        <span class="text-gray-600">95%</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span class="w-24 font-semibold text-gray-800">CSS</span>
+        <div class="progress-bar w-full">
+          <div class="progress" style="width: 90%"></div>
+        </div>
+        <span class="text-gray-600">90%</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span class="w-24 font-semibold text-gray-800">MySQL</span>
+        <div class="progress-bar w-full">
+          <div class="progress" style="width: 90%"></div>
+        </div>
+        <span class="text-gray-600">90%</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span class="w-24 font-semibold text-gray-800">Git & GitHub</span>
+        <div class="progress-bar w-full">
+          <div class="progress" style="width: 95%"></div>
+        </div>
+        <span class="text-gray-600">95%</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications Section -->
+  <section id="certifications" class="py-12 px-6">
+    <h2 class="text-4xl font-bold text-gray-800 text-center mb-10">Certifications</h2>
+    <div id="certificateGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div class="card p-6 rounded-xl">
+        <img src="Learn Java.jpg" class="w-full h-48 object-cover rounded-lg mb-4" alt="Certificate 1">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Java Certification</h3>
+        <p class="text-gray-600 mb-4">Acquired object-oriented programming knowledge through hands-on Java projects.</p>
+        <button onclick="showCertificateModal('Learn Java.jpg')"
+          class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">View</button>
+      </div>
+      <div class="card p-6 rounded-xl">
+        <img src="Learn HTML.jpg" class="w-full h-48 object-cover rounded-lg mb-4" alt="Certificate 2">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Learn HTML</h3>
+        <p class="text-gray-600 mb-4">Learned the fundamentals of HTML for structuring web content.</p>
+        <button onclick="showCertificateModal('Learn HTML.jpg')"
+          class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">View</button>
+      </div>
+      <div class="card p-6 rounded-xl">
+        <img src="Learn CSS.jpg" class="w-full h-48 object-cover rounded-lg mb-4"
+          alt="Certificate 3">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Learn CSS</h3>
+        <p class="text-gray-600 mb-4">Learned how to style and layout web pages using modern CSS techniques, including Flexbox and Grid.</p>
+        <button onclick="showCertificateModal('Learn CSS.jpg')"
+          class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">View</button>
+      </div>
+      <div class="card p-6 rounded-xl hidden" id="certificate4">
+        <img src="Learn SQL.jpg" class="w-full h-48 object-cover rounded-lg mb-4" alt="Certificate 4">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Learn SQL</h3>
+        <p class="text-gray-600 mb-4">Mastered SQL queries and database operations for data analysis and management.</p>
+        <button onclick="showCertificateModal('Learn SQL.jpg')"
+          class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">View</button>
+      </div>
+      <div class="card p-6 rounded-xl hidden" id="certificate5">
+        <img src="Learn Git & GitHub.jpg" class="w-full h-48 object-cover rounded-lg mb-4" alt="Certificate 5">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Learn Git & GitHub</h3>
+        <p class="text-gray-600 mb-4">Gained practical skills in version control and collaboration using Git and GitHub.</p>
+        <button onclick="showCertificateModal('Learn Git & GitHub.jpg')"
+          class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">View</button>
+      </div>
+      <div class="card p-6 rounded-xl hidden" id="certificate6">
+        <img src="Learn the Command Line.jpg" class="w-full h-48 object-cover rounded-lg mb-4" alt="Certificate 6">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Learn the Command Line</h3>
+        <p class="text-gray-600 mb-4">Developed proficiency in navigating and managing files using the command line.</p>
+        <button onclick="showCertificateModal('Learn the Command Line.jpg')"
+          class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">View</button>
+      </div>
+      <div class="card p-6 rounded-xl hidden" id="certificate7">
+        <img src="Code Foundations Skill Path.jpg" class="w-full h-48 object-cover rounded-lg mb-4" alt="Certificate 7">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Code Foundations</h3>
+        <p class="text-gray-600 mb-4">Completed the foundational course covering core computer science and programming principles.</p>
+        <button onclick="showCertificateModal('Code Foundations Skill Path.jpg')"
+          class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">View</button>
+      </div>
+      <div class="card p-6 rounded-xl hidden" id="certificate8">
+        <img src="Learn how to code.jpg" class="w-full h-48 object-cover rounded-lg mb-4" alt="Certificate 8">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Learn how to Code</h3>
+        <p class="text-gray-600 mb-4">Built a strong foundation in basic coding concepts and problem-solving techniques.</p>
+        <button onclick="showCertificateModal('Learn how to code.jpg')"
+          class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">View</button>
+      </div>
+    </div>
+    <div class="text-center mt-8">
+      <button id="showMoreCertBtn" onclick="toggleCertificates()"
+        class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">Show More</button>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-12 px-6">
+    <h2 class="text-4xl font-bold text-gray-800 text-center mb-10">Projects</h2>
+    <div id="projectGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div class="card p-6 rounded-xl">
+        <img src="/colmar.jpg" class="w-full h-48 object-cover rounded-lg mb-4" alt="Colmar Academy">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Colmar Academy</h3>
+        <p class="text-gray-600 mb-4">A responsive educational platform built with HTML and CSS.</p>
+        <div class="flex space-x-4">
+          <a href="https://github.com/Khushi-0334/Colmar-Academy"
+            class="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-600">Code</a>
+          <a href="https://khushi-0334.github.io/Colmar-Academy/"
+            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Live</a>
+        </div>
+      </div>
+      <div class="card p-6 rounded-xl">
+        <img src="/excursion.jpg" class="w-full h-48 object-cover rounded-lg mb-4" alt="Excursion">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Excursion</h3>
+        <p class="text-gray-600 mb-4">A travel guide app landing page built with HTML and CSS.</p>
+        <div class="flex space-x-4">
+          <a href="https://github.com/Khushi-0334/excursion"
+            class="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-600">Code</a>
+          <a href="https://khushi-0334.github.io/excursion/"
+            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Live</a>
+        </div>
+      </div>
+      <div class="card p-6 rounded-xl">
+        <img src="/travel.jpg" class="w-full h-48 object-cover rounded-lg mb-4" alt="My Favorite Places">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">My Favorite Places</h3>
+        <p class="text-gray-600 mb-4">A web app showcasing favorite places with HTML and CSS.</p>
+        <div class="flex space-x-4">
+          <a href="https://github.com/Khushi-0334/Favorite-places"
+            class="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-600">Code</a>
+          <a href="https://khushi-0334.github.io/Favorite-places/"
+            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Live</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-12 px-6">
+    <h2 class="text-4xl font-bold text-center text-gray-800 mb-10">Contact Me</h2>
+    <div class="max-w-md mx-auto bg-white p-8 rounded-xl shadow-lg">
+      <div class="space-y-4">
+        <input type="text" id="name" placeholder="Your Name"
+          class="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600">
+        <input type="email" id="email" placeholder="Your Email"
+          class="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600">
+        <textarea id="message" placeholder="Your Message"
+          class="w-full p-4 border rounded-lg h-32 focus:outline-none focus:ring-2 focus:ring-blue-600"></textarea>
+        <button onclick="sendToWhatsApp()"
+          class="w-full bg-blue-600 text-white p-4 rounded-lg hover:bg-blue-700">Send Message</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer class="py-6 bg-blue-500/30 text-center backdrop-blur-md">
+    <div class="flex justify-center gap-6">
+      <a href="mailto:khushisayyad01@gmail.com" class="text-gray-800 hover:text-blue-600">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 2l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z" />
+        </svg>
+      </a>
+      <a href="https://github.com/Khushi-0334/" target="_blank" class="text-gray-800 hover:text-blue-600">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.68-.22.68-.48v-1.7c-2.78.61-3.37-1.34-3.37-1.34-.46-1.16-1.12-1.47-1.12-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.64-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0112 6.8c.85.004 1.71.11 2.52.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10.01 10.01 0 0022 12c0-5.52-4.48-10-10-10z" />
+        </svg>
+      </a>
+      <a href="https://www.linkedin.com/in/khushi-sayyad-5bab96219/" target="_blank"
+        class="text-gray-800 hover:text-blue-600">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9.02h3.41v1.56h.05c.48-.91 1.65-1.87 3.39-1.87 3.63 0 4.3 2.39 4.3 5.5v6.24zM5.34 7.46c-1.15 0-2.09-.94-2.09-2.09s.94-2.09 2.09-2.09 2.09.94 2.09 2.09-.94 2.09-2.09 2.09zm1.78 13h-3.56V9.02h3.56v11.43zM22 0H2C.9 0 0 .9 0 2v20c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V2c0-1.1-.9-2-2-2z" />
+        </svg>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    var gk_isXlsx = false;
+    var gk_xlsxFileLookup = {};
+    var gk_fileData = {};
+    function filledCell(cell) {
+      return cell !== '' && cell != null;
+    }
+    function loadFileData(filename) {
+      if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+        try {
+          var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+          var firstSheetName = workbook.SheetNames[0];
+          var worksheet = workbook.Sheets[firstSheetName];
+          var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+          var filteredData = jsonData.filter(row => row.some(filledCell));
+          var headerRowIndex = filteredData.findIndex((row, index) =>
+            row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+          );
+          if (headerRowIndex === -1 || headerRowIndex > 25) {
+            headerRowIndex = 0;
+          }
+          var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex));
+          csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+          return csv;
+        } catch (e) {
+          console.error(e);
+          return "";
+        }
+      }
+      return gk_fileData[filename] || "";
+    }
+
+    function sendToWhatsApp() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      if (!name || !email || !message) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      const whatsappNumber = '9370198090';
+      const text = `Name: ${name}\nEmail: ${email}\nMessage: ${message}`;
+      const encodedText = encodeURIComponent(text);
+      const whatsappUrl = `https://wa.me/+91${whatsappNumber}?text=${encodedText}`;
+
+      window.open(whatsappUrl, '_blank');
+    }
+
+    function showResumeModal() {
+      document.getElementById('resumeModal').style.display = 'flex';
+    }
+
+    function closeResumeModal() {
+      document.getElementById('resumeModal').style.display = 'none';
+    }
+
+    function showCertificateModal(imageSrc) {
+      document.getElementById('certificateImage').src = imageSrc;
+      document.getElementById('certificateModal').style.display = 'flex';
+    }
+
+    function closeCertificateModal() {
+      document.getElementById('certificateModal').style.display = 'none';
+    }
+
+    function toggleCertificates() {
+      const certs = ['certificate4', 'certificate5', 'certificate6', 'certificate7', 'certificate8'];
+      const showMoreCertBtn = document.getElementById('showMoreCertBtn');
+      const anyHidden = certs.some(id => document.getElementById(id).classList.contains('hidden'));
+
+      if (anyHidden) {
+        certs.forEach(id => document.getElementById(id).classList.remove('hidden'));
+        showMoreCertBtn.textContent = 'Show Less';
+      } else {
+        certs.forEach(id => document.getElementById(id).classList.add('hidden'));
+        showMoreCertBtn.textContent = 'Show More';
+      }
+    }
+
+    // Initialize Typed.js for animated text
+    var typed = new Typed('#typed', {
+      strings: ['Developer', 'Creator', 'Innovator', 'Coder'],
+      typeSpeed: 60,
+      backSpeed: 50,
+      loop: true
+    });
+  </script>
+</body>
+
+</html>
